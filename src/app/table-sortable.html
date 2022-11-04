@@ -1,0 +1,210 @@
+<!-- <p>You can introduce custom directives for table headers to sort columns</p> -->
+
+<section class="pb-4">
+
+<nav id="sidenav-2" data-mdb-close-on-esc="false" class="sidenav sidenav-primary ps" data-mdb-position="absolute" data-mdb-mode="side" data-mdb-content="#content" data-mdb-focus-trap="false" style="width: 170px; height: 100%; position: absolute; margin-left: 0px; transition: all 0.3s linear 0s; transform: translateX(0%);">
+<h5>Filter</h5>
+<hr>
+
+<h6>STOPS</h6>
+<div class="form-check">
+<input
+	mdbCheckbox
+	class="form-check-input"
+	type="checkbox"
+	id="flexCheckDefault"
+	value="non stop"
+/>
+<label class="form-check-label" for="flexCheckboxDefault">Non-stop</label>
+</div>
+<div class="form-check">
+<input
+	mdbCheckbox
+	class="form-check-input"
+	type="checkbox"
+	id="flexCheckDefault"
+	value="1 stop"
+/>
+<label class="form-check-label" for="flexCheckboxdefault">1 stop</label>
+</div>
+<hr>
+
+<h6>DEPARTURE TIME</h6>
+<div class="form-check">
+<input
+	mdbCheckbox
+	class="form-check-input"
+	type="checkbox"
+	value="morning"
+	id="flexCheckDefault"
+/>
+<label class="form-check-label" for="flexCheckDefault">Morning</label>
+</div>
+<div class="form-check">
+<input
+	mdbCheckbox
+	class="form-check-input"
+	type="checkbox"
+	value="mid day"
+	id="flexCheckDefault"
+/>
+<label class="form-check-label" for="flexCheckDefault">Mid day</label>
+</div>
+<div class="form-check">
+<input
+	mdbCheckbox
+	class="form-check-input"
+	type="checkbox"
+	value="evening"
+	id="flexCheckDefault"
+/>
+<label class="form-check-label" for="flexCheckDefault">Evening</label>
+</div>
+<div class="form-check">
+<input
+	mdbCheckbox
+	class="form-check-input"
+	type="checkbox"
+	value="night"
+	id="flexCheckDefault"
+/>
+<label class="form-check-label" for="flexCheckDefault">Night</label>
+</div>
+<hr>
+
+<h6>PREFERRED AIRLINES</h6>
+<div class="form-check">
+<input
+	mdbCheckbox
+	class="form-check-input"
+	type="checkbox"
+	value="air asia"
+	id="flexCheckDefault"
+/>
+<label class="form-check-label" for="flexCheckDefault">
+	<img src="https://imgak.goibibo.com/flights-gi-assets/images/v2/app-img/6E.png" alt="indigo logo" height="19px" width="22px">
+	&nbsp;
+	<span>Indigo</span>
+</label>
+</div>
+
+<div class="form-check">
+<input
+	mdbCheckbox
+	class="form-check-input"
+	type="checkbox"
+	value="air india"
+	id="flexCheckDefault"
+/>
+<label class="form-check-label" for="flexCheckDefault">
+	<img src="https://imgak.goibibo.com/flights-gi-assets/images/v2/app-img/AI.png" alt="air india logo" height="19px" width="22px">
+	&nbsp;
+	<span>Air India</span>
+</label>
+</div>
+
+<div class="form-check">
+<input
+	mdbCheckbox
+	class="form-check-input"
+	type="checkbox"
+	value="indigo"
+	id="flexCheckDefault"
+/>
+<label class="form-check-label" for="flexCheckDefault">
+	<img src="https://imgak.goibibo.com/flights-gi-assets/images/v2/app-img/I5.png" alt="air asia logo" height="19px" width="22px">
+	&nbsp;
+	<span>Air Asia</span>
+</label>
+</div>
+
+<div class="form-check">
+<input
+	mdbCheckbox
+	class="form-check-input"
+	type="checkbox"
+	value="vistara"
+	id="flexCheckDefault"
+/>
+<label class="form-check-label" for="flexCheckDefault">
+	<img src="https://imgak.goibibo.com/flights-gi-assets/images/v2/app-img/UK.png" alt="vistara logo" height="19px" width="22px">
+	&nbsp;
+	<span>Vistara</span>
+</label>
+</div>
+<hr>
+
+<!-- <mdb-range [min]="0" [max]="5"></mdb-range> -->
+
+<button>Apply filters</button>
+<p> </p>
+<button>Reset filters</button>
+
+
+</nav>
+
+<table class="table table-striped" align="right" style="width: 80%" >
+	<thead>
+		<tr>
+			<th scope="col"></th>
+			<th scope="col">Airline</th>
+			<th scope="col" sortable="duration" (sort)="onSort($event)">Duration</th>
+			<th scope="col" sortable="dept_time" (sort)="onSort($event)">Departure time</th>
+			<th scope="col" sortable="arr_time" (sort)="onSort($event)">Arrival time</th>
+			<th scope="col" sortable="price" (sort)="onSort($event)">Price</th>
+		</tr>
+	</thead>
+
+	<tbody>
+		<tr *ngFor="let flight of flights">
+
+		<th scope="row">
+		<div class="form-check">
+			<input class="form-check-input" name="flight" type="radio" value="" id="flexCheckDefault" />
+		</div>
+		</th>
+
+			<!-- <td scope="row">{{ flight.airline_name }}</td> -->
+
+			<!-- Airline column -->
+			<td>
+			<div class="d-flex align-items-center">
+				<img
+						alt=""
+						[src]="flight.image"
+						style="width: 45px; height: 45px"
+						class="rounded-circle"
+						/>
+				<div class="ms-3">
+					<p class="fw-bold mb-1">{{ flight.airline_name }}</p>
+					<p class="text-muted mb-0">{{ flight.flight_no }}</p>
+				</div>
+			</div>
+			</td>
+
+			<!-- Duration column -->
+			<td>
+				<p class="fw-normal mb-1">{{ flight.duration }}</p>
+				<p class="text-muted mb-0">{{ flight.stop }}</p>
+			</td>
+
+			<!-- Departure time column -->
+			<td>{{ flight.dept_time }}</td>
+
+			<!-- Arrival time column -->
+			<td>{{ flight.arr_time }}</td>
+
+			<!-- Price column -->
+			<td>{{ flight.price }}</td>
+
+			<!-- <td>{{ flight.duration }}</td>
+			<td>{{ flight.dept_time }}</td>
+			<td>{{ flight.arr_time }}</td>
+			<td>{{ flight.price }}</td> -->
+
+		</tr>
+	</tbody>
+
+</table>
+
+</section>
